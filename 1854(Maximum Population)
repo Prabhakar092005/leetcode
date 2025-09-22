@@ -1,0 +1,23 @@
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int maximumPopulation(vector<vector<int>>& logs) {
+        vector<int> years(2051, 0);
+        for (auto& log : logs) {
+            years[log[0]]++;
+            years[log[1]]--;
+        }
+        int maxPop = 0, year = 0, current = 0;
+        for (int i = 1950; i <= 2050; i++) {
+            current += years[i];
+            if (current > maxPop) {
+                maxPop = current;
+                year = i;
+            }
+        }
+        return year;
+    }
+};
+
